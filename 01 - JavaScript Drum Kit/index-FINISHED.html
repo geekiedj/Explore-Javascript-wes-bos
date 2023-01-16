@@ -56,6 +56,7 @@
     <audio data-key="76" src="sounds/tink.wav"></audio>
 
     <script>
+      //This function handles transition event and removes playing class
       function removeTransition(e) {
         if (e.propertyName !== "transform") return; // skip if it's not a transform
         this.classList.remove("playing");
@@ -67,14 +68,10 @@
         const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
         const keys = document.querySelectorAll(".key");
 
-        if (!audio) return; // Stop the function if there's no audio for pressed key
+        if (!audio) return; //  if there's no audio for pressed key, Stop the function.
 
-        audio.currentTime = 0; // Reset audio time to start for successive key presses
+        audio.currentTime = 0; // Reset audio time
         audio.play();
-
-        var randomColor = Math.floor(Math.random() * 1000 + 1);
-        document.getElementById("content").style.backgroundColor =
-          "#" + randomColor;
 
         key.classList.add("playing");
         keys.forEach((key) =>
@@ -82,6 +79,9 @@
         );
       }
       window.addEventListener("keydown", playSound);
+
+      /** wes bos solution : **/
+
       // function removeTransition(e) {
       //   if (e.propertyName !== 'transform') return;
       //   e.target.classList.remove('playing');
